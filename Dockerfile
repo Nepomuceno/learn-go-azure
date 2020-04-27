@@ -23,6 +23,8 @@ RUN adduser \
     --uid "${UID}" \
     "${USER}"
 
+WORKDIR $GOPATH/src/nepomuceno/learn-go-azure/
+
 COPY . .
 
 # Fetch dependencies.
@@ -31,7 +33,7 @@ RUN go get -d -v
 # Build the binary
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -ldflags='-w -s -extldflags "-static"' -a \
-    -o /go/bin/az-auto-tag .
+    -o /go/bin/learn-go-azure .
 
 ############################
 # STEP 2 build a small image
